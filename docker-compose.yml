@@ -1,0 +1,27 @@
+version: '3'
+services:
+     nginx:
+          build: ./nginx
+          container_name: nginx
+          ports:
+               - 80:80
+               - 443:443
+          volumes:
+               - static:/usr/local/app/out
+     static:
+          build: ./static
+          container_name: static
+          volumes:
+               - static:/usr/local/app/out
+     dynamic:
+          build: ./dynamic
+          container_name: dynamic
+          expose:
+               - 3000
+     backend:
+          build: ./backend
+          container_name: backend
+          expose:
+               - 3000
+volumes:
+     static:
